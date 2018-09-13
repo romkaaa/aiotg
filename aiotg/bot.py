@@ -149,7 +149,7 @@ class Bot:
             )
             self._process_updates(updates)
 
-    def run(self, debug=False, reload=None):
+    def run(self, debug=False, reload=None, loop=None):
         """
         Convenience method for running bots in getUpdates mode
 
@@ -164,6 +164,9 @@ class Bot:
         loop = asyncio.get_event_loop()
 
         logging.basicConfig(level=logging.DEBUG if debug else logging.INFO)
+
+        if loop is None:
+            loop = asyncio.get_event_loop()
 
         if reload is None:
             reload = debug
